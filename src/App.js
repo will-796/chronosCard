@@ -16,9 +16,36 @@ class App extends React.Component {
       trunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-      cards: [],
+      cards: [
+        // {
+        //   attr1: '20',
+        //   attr2: '20',
+        //   attr3: '20',
+        //   description: 'awdawd',
+        //   image: 'awdawd',
+        //   name: 'wdawd',
+        //   rare: 'normal',
+        //   trunfo: false,
+        // },
+        // {
+        //   attr1: '30',
+        //   attr2: '30',
+        //   attr3: '30',
+        //   description: 'gatos',
+        //   image: 'no image',
+        //   name: 'gatos fofos',
+        //   rare: 'muito raro',
+        //   trunfo: true,
+        // },
+      ],
     };
   }
+
+  containsTrufoInCards = () => {
+    const { cards } = this.state;
+    if (cards.length === 0) return false;
+    return cards.some((card) => card.trunfo);
+  };
 
   validateButton = () => {
     const { name, description, image, attr1, attr2, attr3 } = this.state;
@@ -63,21 +90,29 @@ class App extends React.Component {
     event.preventDefault();
     const { name, description, image, attr1, attr2, attr3, rare, trunfo } = this.state;
 
+    this.setState(
+      (prev) => ({
+        name: '',
+        description: '',
+        image: '',
+        attr1: '0',
+        attr2: '0',
+        attr3: '0',
+        rare: 'normal',
+        trunfo: false,
+        cards: [
+          ...prev.cards,
+          { name, description, image, attr1, attr2, attr3, rare, trunfo },
+        ],
+      }),
+      () => this.setState({ hasTrunfo: this.containsTrufoInCards() }),
+    );
+  };
+
+  onDeleteButtonClick = (name) => {
     this.setState((prev) => ({
-      name: '',
-      description: '',
-      image: '',
-      attr1: '0',
-      attr2: '0',
-      attr3: '0',
-      rare: 'normal',
-      trunfo: false,
-      hasTrunfo: prev.trunfo,
-      cards: [
-        ...prev.cards,
-        { name, description, image, attr1, attr2, attr3, rare, trunfo },
-      ],
-    }));
+      cards: prev.cards.filter((card) => card.name !== name),
+    }), () => this.setState({ hasTrunfo: this.containsTrufoInCards() }));
   };
 
   render() {
@@ -92,6 +127,7 @@ class App extends React.Component {
       trunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      cards,
     } = this.state;
     return (
       <div>
@@ -119,7 +155,24 @@ class App extends React.Component {
           cardImage={ image }
           cardRare={ rare }
           cardTrunfo={ trunfo }
+          onDeleteButtonClick={ this.onDeleteButtonClick }
+          preview={ false }
         />
+        {cards.map((card) => (
+          <Card
+            key={ card.name }
+            cardName={ card.name }
+            cardDescription={ card.description }
+            cardAttr1={ card.attr1 }
+            cardAttr2={ card.attr2 }
+            cardAttr3={ card.attr3 }
+            cardImage={ card.image }
+            cardRare={ card.rare }
+            cardTrunfo={ card.trunfo }
+            onDeleteButtonClick={ this.onDeleteButtonClick }
+            preview
+          />
+        ))}
       </div>
     );
   }
