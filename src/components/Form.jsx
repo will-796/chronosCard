@@ -2,10 +2,31 @@ import React, { Component } from 'react';
 
 export default class Form extends Component {
   render() {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+      isSaveButtonDisabled,
+      onInputChange,
+      onSaveButtonClick,
+    } = this.props;
     return (
       <form>
         <label htmlFor="name">
-          <input type="text" data-testid="name-input" name="name" id="name" />
+          <input
+            type="text"
+            data-testid="name-input"
+            name="name"
+            id="name"
+            value={ cardName }
+            onChange={ onInputChange }
+          />
         </label>
         <label htmlFor="description">
           <input
@@ -13,6 +34,8 @@ export default class Form extends Component {
             data-testid="description-input"
             name="description"
             id="description"
+            value={ cardDescription }
+            onChange={ onInputChange }
           />
         </label>
         <label htmlFor="attr1">
@@ -21,6 +44,8 @@ export default class Form extends Component {
             data-testid="attr1-input"
             name="attr1"
             id="attr1"
+            value={ cardAttr1 }
+            onChange={ onInputChange }
           />
         </label>
         <label htmlFor="attr2">
@@ -29,6 +54,8 @@ export default class Form extends Component {
             data-testid="attr2-input"
             name="attr2"
             id="attr2"
+            value={ cardAttr2 }
+            onChange={ onInputChange }
           />
         </label>
         <label htmlFor="attr3">
@@ -37,6 +64,8 @@ export default class Form extends Component {
             data-testid="attr3-input"
             name="attr3"
             id="attr3"
+            value={ cardAttr3 }
+            onChange={ onInputChange }
           />
         </label>
         <label htmlFor="image">
@@ -45,11 +74,19 @@ export default class Form extends Component {
             data-testid="image-input"
             name="image"
             id="image"
+            value={ cardImage }
+            onChange={ onInputChange }
           />
         </label>
 
         <label htmlFor="rare">
-          <select name="rare" id="rare" data-testid="rare-input">
+          <select
+            name="rare"
+            id="rare"
+            data-testid="rare-input"
+            value={ cardRare }
+            onChange={ onInputChange }
+          >
             <option value="normal">normal</option>
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
@@ -62,10 +99,17 @@ export default class Form extends Component {
             name="trunfo"
             id="trunfo"
             data-testid="trunfo-input"
+            checked={ cardTrunfo }
+            onChange={ onInputChange }
           />
         </label>
 
-        <button type="submit" data-testid="save-button">
+        <button
+          type="submit"
+          data-testid="save-button"
+          disabled={ isSaveButtonDisabled }
+          onClick={ onSaveButtonClick }
+        >
           Salvar
         </button>
       </form>
