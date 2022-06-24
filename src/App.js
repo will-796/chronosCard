@@ -14,20 +14,50 @@ class App extends React.Component {
       attr3: '0',
       rare: 'normal',
       trunfo: false,
-      isSaveButtonDisabled: false,
+      isSaveButtonDisabled: true,
     };
   }
+
+  validateButton = () => {
+    const { name, description, image, attr1, attr2, attr3 } = this.state;
+
+    const maxValue = 90;
+    const minValue = 0;
+    const maxSumValue = 210;
+
+    const notEmpty = name !== '' && description !== '' && image !== '';
+
+    const maxSum = Number(attr1) + Number(attr2) + Number(attr3) <= maxSumValue;
+
+    const maxInputValue = Number(attr1) <= maxValue
+      && Number(attr2) <= maxValue
+      && Number(attr3) <= maxValue;
+
+    const minInputValue = Number(attr1) >= minValue
+      && Number(attr2) >= minValue
+      && Number(attr3) >= minValue;
+
+    if (notEmpty && maxSum && maxInputValue && minInputValue) {
+      return false;
+    }
+    return true;
+  };
 
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
-    this.setState({ [name]: value });
-  }
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => this.setState({
+        isSaveButtonDisabled: this.validateButton(),
+      }),
+    );
+  };
 
-  onSaveButtonClick = () => {
-
-  }
+  onSaveButtonClick = () => {};
 
   render() {
     const {
