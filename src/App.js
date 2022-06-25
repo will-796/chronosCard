@@ -16,28 +16,10 @@ class App extends React.Component {
       trunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-      cards: [
-        // {
-        //   attr1: '20',
-        //   attr2: '20',
-        //   attr3: '20',
-        //   description: 'awdawd',
-        //   image: 'awdawd',
-        //   name: 'wdawd',
-        //   rare: 'normal',
-        //   trunfo: false,
-        // },
-        // {
-        //   attr1: '30',
-        //   attr2: '30',
-        //   attr3: '30',
-        //   description: 'gatos',
-        //   image: 'no image',
-        //   name: 'gatos fofos',
-        //   rare: 'muito raro',
-        //   trunfo: true,
-        // },
-      ],
+      nameFilter: '',
+      rareFilter: 'todas',
+      trunfoFilter: false,
+      cards: [],
     };
   }
 
@@ -110,9 +92,12 @@ class App extends React.Component {
   };
 
   onDeleteButtonClick = (name) => {
-    this.setState((prev) => ({
-      cards: prev.cards.filter((card) => card.name !== name),
-    }), () => this.setState({ hasTrunfo: this.containsTrufoInCards() }));
+    this.setState(
+      (prev) => ({
+        cards: prev.cards.filter((card) => card.name !== name),
+      }),
+      () => this.setState({ hasTrunfo: this.containsTrufoInCards() }),
+    );
   };
 
   render() {
@@ -127,8 +112,16 @@ class App extends React.Component {
       trunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      nameFilter,
+      rareFilter,
+      trunfoFilter,
       cards,
     } = this.state;
+
+    const filtredCards = cards
+      .filter((card) => (!trunfoFilter ? true : card.trunfo))
+      .filter((card) => (nameFilter === '' ? true : card.name.includes(nameFilter)))
+      .filter((card) => (rareFilter === 'todas' ? true : card.rare === rareFilter));
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -158,7 +151,7 @@ class App extends React.Component {
           onDeleteButtonClick={ this.onDeleteButtonClick }
           preview={ false }
         />
-        {cards.map((card) => (
+        {filtredCards.map((card) => (
           <Card
             key={ card.name }
             cardName={ card.name }
@@ -173,6 +166,41 @@ class App extends React.Component {
             preview
           />
         ))}
+        <label htmlFor="nameFilter">
+          <input
+            data-testid="name-filter"
+            type="text"
+            value={ nameFilter }
+            name="nameFilter"
+            id="nameFilter"
+            onChange={ this.onInputChange }
+            disabled={ trunfoFilter }
+          />
+        </label>
+        <label htmlFor="rareFilter">
+          <select
+            name="rareFilter"
+            id="rareFilter"
+            data-testid="rare-filter"
+            value={ rareFilter }
+            onChange={ this.onInputChange }
+            disabled={ trunfoFilter }
+          >
+            <option value="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
+        </label>
+        <label htmlFor="trunfoFilter" data-testid="trunfo-filter">
+          <input
+            type="checkbox"
+            name="trunfoFilter"
+            id="trunfoFilter"
+            checked={ trunfoFilter }
+            onChange={ this.onInputChange }
+          />
+        </label>
       </div>
     );
   }
