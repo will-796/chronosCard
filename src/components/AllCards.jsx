@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Card from './Card';
+import '../styles/allCards.css';
 
 export default class AllCards extends Component {
   constructor(props) {
