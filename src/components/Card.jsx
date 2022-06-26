@@ -16,7 +16,7 @@ export default class Card extends Component {
       onDeleteButtonClick,
     } = this.props;
     return (
-      <div>
+      <div className="card">
         <p data-testid="name-card">{cardName}</p>
         <p data-testid="description-card">{cardDescription}</p>
         <p data-testid="attr1-card">{cardAttr1}</p>
@@ -36,6 +36,7 @@ export default class Card extends Component {
           </button>
         )}
       </div>
+
     );
   }
 }

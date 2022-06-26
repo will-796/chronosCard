@@ -1,0 +1,230 @@
+.app {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  font-family: Verdana , sans-serif;
+}
+
+.app h1 {
+  text-align: center;
+}
+
+.header {
+  background-color: #036b52;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 5px 15px;
+  padding: 12px 0;
+}
+
+.form-preview {
+  display: flex;
+  height: 80%;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+  padding: 40px 80px;
+}
+
+.preview-container {
+  background-color: #023031;
+  display: flex;
+  flex-basis: 50%;
+  flex-direction: column;
+  gap: 80px;
+  padding: 40px 80px;
+}
+
+.preview-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 28.7px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  background-color: white;
+  border: none;
+  height: 37px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+textarea:focus, input:focus, select:focus {
+  outline: none;
+}
+
+.form-container form span {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.label-name {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-name input {
+  border-bottom: 1px solid gray;
+}
+
+.label-description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-description input {
+  border-bottom: 1px solid gray;
+  height: 80px;
+}
+
+.label-image {
+  display: flex;
+  gap: 8px;
+}
+
+.label-image input {
+  border: 1px solid gray;
+}
+
+.label-rare {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-rare select {
+  align-self: center;
+  border: none;
+  border-bottom: 1px solid gray;
+  height: 37px;
+  width: 100%;
+}
+
+.label-trunfo {
+  display: flex;
+  gap: 8px;
+}
+
+.label-trunfo input {
+  align-self: center;
+  border-bottom: 1px solid gray;
+  height: 20px;
+  width: 20px;
+}
+
+.attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.attrs label {
+  align-items: center;
+  display: flex;
+  gap: 22px;
+}
+
+.attrs label input {
+  border: 1px solid gray;
+}
+
+.card {
+  align-self: center;
+  border: 10px solid #036b52;
+  border-radius: 12px;
+}
+
+.preview-container .card {
+  background-color: #fafafa;
+  height: 50%;
+  width: 50%;
+}
+
+form button {
+  background-color: #003be5;
+  color: white;
+  height: 40px;
+  padding: 8px 32px;
+  width: 100px;
+}
+
+.all-cards {
+  display: flex;
+}
+
+.all-cards-title {
+  background-color: #036b52;
+  padding: 20px 0;
+}
+
+.all-cards aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+  width: 20%;
+}
+
+
+.all-cards aside span {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.label-nameFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-nameFilter input {
+  border: 1px solid gray;
+}
+
+.label-rareFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-rareFilter select {
+  border: 1px solid gray;
+  height: 37px;
+  width: 100%;
+}
+
+.label-trunfoFilter {
+  display: flex;
+  gap: 8px;
+}
+
+.label-trunfoFilter input {
+  align-self: center;
+  border: 1px solid gray;
+  height: 20px;
+  width: 20px;
+}
+
+.all-cards section {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(5, 20%);
+
+
+  /* margin: auto; */
+}
+
