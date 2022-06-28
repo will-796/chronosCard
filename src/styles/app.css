@@ -141,16 +141,8 @@ textarea:focus, input:focus, select:focus {
   border: 1px solid gray;
 }
 
-.card {
-  align-self: center;
-  border: 10px solid #036b52;
-  border-radius: 12px;
-}
-
-.preview-container .card {
-  background-color: #fafafa;
-  height: 50%;
-  width: 50%;
+.point-counter {
+  align-self: flex-end;
 }
 
 form button {

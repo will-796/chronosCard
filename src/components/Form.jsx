@@ -9,6 +9,7 @@ export default class Form extends Component {
       cardAttr1,
       cardAttr2,
       cardAttr3,
+      maxSumAttr,
       cardImage,
       cardRare,
       cardTrunfo,
@@ -51,6 +52,7 @@ export default class Form extends Component {
                 data-testid="attr1-input"
                 name="attr1"
                 id="attr1"
+                placeholder="0"
                 value={ cardAttr1 }
                 onChange={ onInputChange }
               />
@@ -62,6 +64,7 @@ export default class Form extends Component {
                 data-testid="attr2-input"
                 name="attr2"
                 id="attr2"
+                placeholder="0"
                 value={ cardAttr2 }
                 onChange={ onInputChange }
               />
@@ -73,10 +76,16 @@ export default class Form extends Component {
                 data-testid="attr3-input"
                 name="attr3"
                 id="attr3"
+                placeholder="0"
                 value={ cardAttr3 }
                 onChange={ onInputChange }
               />
             </label>
+            <span className="point-counter">
+              {maxSumAttr < 0
+                ? 'máximo de pontos ultrapasado'
+                : `restam ${maxSumAttr} pontos`}
+            </span>
           </div>
           <label htmlFor="image" className="label-image">
             <span>Imagem</span>
@@ -139,6 +148,7 @@ Form.propTypes = {
   cardAttr1: PropTypes.string.isRequired,
   cardAttr2: PropTypes.string.isRequired,
   cardAttr3: PropTypes.string.isRequired,
+  maxSumAttr: PropTypes.number.isRequired,
   cardDescription: PropTypes.string.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardName: PropTypes.string.isRequired,

@@ -57,7 +57,15 @@
 }
 
 .all-cards section {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(5, 20%);
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 3%;
+  justify-content: center;
+  padding: 32px;
+}
+
+.all-cards section .card-container {
+  height: 30vw;
+  width: 30%;
 }

@@ -11,9 +11,10 @@ class App extends React.Component {
       name: '',
       description: '',
       image: '',
-      attr1: '0',
-      attr2: '0',
-      attr3: '0',
+      attr1: '',
+      attr2: '',
+      attr3: '',
+      maxSumAttr: '210',
       rare: 'normal',
       trunfo: false,
       hasTrunfo: false,
@@ -37,7 +38,8 @@ class App extends React.Component {
 
     const notEmpty = name !== '' && description !== '' && image !== '';
 
-    const maxSum = Number(attr1) + Number(attr2) + Number(attr3) <= maxSumValue;
+    const maxSum = Number(attr1) + Number(attr2) + Number(attr3);
+    const isValidSum = maxSum <= maxSumValue;
 
     const maxInputValue = Number(attr1) <= maxValue
       && Number(attr2) <= maxValue
@@ -47,7 +49,20 @@ class App extends React.Component {
       && Number(attr2) >= minValue
       && Number(attr3) >= minValue;
 
-    if (notEmpty && maxSum && maxInputValue && minInputValue) {
+    this.setState(
+      {
+        attr1: Number(attr1) >= maxValue ? `${maxValue}` : attr1,
+        attr2: Number(attr2) >= maxValue ? `${maxValue}` : attr2,
+        attr3: Number(attr3) >= maxValue ? `${maxValue}` : attr3,
+      },
+      () => this.setState((prev) => ({
+        maxSumAttr:
+            maxSumValue
+            - (Number(prev.attr1) + Number(prev.attr2) + Number(prev.attr3)),
+      })),
+    );
+
+    if (notEmpty && isValidSum && maxInputValue && minInputValue) {
       return false;
     }
     return true;
@@ -107,6 +122,7 @@ class App extends React.Component {
       attr1,
       attr2,
       attr3,
+      maxSumAttr,
       rare,
       trunfo,
       hasTrunfo,
@@ -124,6 +140,7 @@ class App extends React.Component {
             cardAttr1={ attr1 }
             cardAttr2={ attr2 }
             cardAttr3={ attr3 }
+            maxSumAttr={ maxSumAttr }
             cardImage={ image }
             cardRare={ rare }
             cardTrunfo={ trunfo }
@@ -155,7 +172,6 @@ class App extends React.Component {
           onDeleteButtonClick={ this.onDeleteButtonClick }
           preview
         />
-
       </div>
     );
   }
