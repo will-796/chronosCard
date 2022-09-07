@@ -96,6 +96,7 @@ class App extends React.Component {
         attr3: '0',
         rare: 'normal',
         trunfo: false,
+        isSaveButtonDisabled: true,
         cards: [
           ...prev.cards,
           { name, description, image, attr1, attr2, attr3, rare, trunfo },
